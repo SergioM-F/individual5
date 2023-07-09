@@ -1,7 +1,6 @@
 package cl.samf.individual5;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,16 +12,20 @@ import cl.samf.individual5.databinding.ItemBinding;
 
 public class AdaptersWords extends RecyclerView.Adapter<AdaptersWords.ViewHolder> {
         private List<String> words;
+        public void setData(List<String> data) {
+        this.words = data;
+     }
     @NonNull
     @Override
     public AdaptersWords.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemBinding binding = ItemBinding.inflate((LayoutInflater.from(parent.getContext())));
+        ItemBinding binding = ItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdaptersWords.ViewHolder holder, int position) {
         String item = words.get(position);
+        holder.mostrarInfo(item);
     }
 
     @Override
@@ -30,14 +33,15 @@ public class AdaptersWords extends RecyclerView.Adapter<AdaptersWords.ViewHolder
          return words.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemBinding ItemBinding;
-        public ViewHolder(@NonNull ItemBinding binding) {
+        private ItemBinding itemBinding;
+        public ViewHolder(ItemBinding binding) {
             super(binding.getRoot());
-            ItemBinding = binding;
+            this.itemBinding = binding;
         }
         public void mostrarInfo(String words) {
-            ItemBinding.textView2.setText(words);
+            itemBinding.textView2.setText(words);
         }
     }
 }

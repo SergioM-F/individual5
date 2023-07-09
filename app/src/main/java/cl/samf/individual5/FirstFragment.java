@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cl.samf.individual5.databinding.FragmentFirstBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FirstFragment#newInstance} factory method to
@@ -58,7 +63,20 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        FragmentFirstBinding binding = FragmentFirstBinding.inflate(getActivity().getLayoutInflater(), container,false);
+        AdaptersWords adapter = new AdaptersWords();
+        adapter.setData(getData());
+        binding.RecyclerViewFF.setAdapter(adapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        return binding.getRoot();
+    }
+
+    public List<String> getData() {
+        List<String> data = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            data.add("word " + i);
+        }
+        return data;
     }
 }
