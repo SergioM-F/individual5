@@ -20,6 +20,8 @@ import cl.samf.individual5.databinding.FragmentFirstBinding;
  */
 public class FirstFragment extends Fragment {
 
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -68,9 +70,17 @@ public class FirstFragment extends Fragment {
         AdaptersWords adapter = new AdaptersWords();
         adapter.setData(getData());
         binding.RecyclerViewFF.setAdapter(adapter);
+        binding.floatingActionButton.setOnClickListener(v -> {
+                adapter.addwords("NewWord " + adapter.getItemCount());
+                binding.RecyclerViewFF.getAdapter().notifyItemInserted(adapter.getItemCount());
+            binding.RecyclerViewFF.smoothScrollToPosition(adapter.getItemCount() - 1);
+        });
+
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
+
+
 
     public List<String> getData() {
         List<String> data = new ArrayList<>();

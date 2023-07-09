@@ -15,6 +15,12 @@ public class AdaptersWords extends RecyclerView.Adapter<AdaptersWords.ViewHolder
         public void setData(List<String> data) {
         this.words = data;
      }
+    public void addwords(String newItem) {
+        words.add(newItem);
+
+        //notifyItemInserted(words.size() - 1);
+    }
+
     @NonNull
     @Override
     public AdaptersWords.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
