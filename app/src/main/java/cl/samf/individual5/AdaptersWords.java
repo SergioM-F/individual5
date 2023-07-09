@@ -1,7 +1,9 @@
 package cl.samf.individual5;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,14 +42,22 @@ public class AdaptersWords extends RecyclerView.Adapter<AdaptersWords.ViewHolder
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ItemBinding itemBinding;
         public ViewHolder(ItemBinding binding) {
             super(binding.getRoot());
             this.itemBinding = binding;
+            itemView.setOnClickListener(this);
         }
         public void mostrarInfo(String words) {
             itemBinding.textView2.setText(words);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            String item = words.get(position);
+            Toast.makeText(itemView.getContext(), "Seleccionaste " + item, Toast.LENGTH_LONG).show();
         }
     }
 }
